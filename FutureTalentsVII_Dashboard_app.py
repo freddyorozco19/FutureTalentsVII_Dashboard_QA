@@ -1403,3 +1403,11 @@ if selected == "Player Search":
         st.markdown('<h1 style="font-size: 25px;">DEFENSIVE</h1>', unsafe_allow_html=True)
     with space2:
         st.markdown('<h1 style="font-size: 25px;">POSSESION</h1>', unsafe_allow_html=True)
+    space3, space4, space5 = st.columns(3)
+    with space3:
+        st.markdown('<h1 style="font-size: 25px;">CREATION</h1>', unsafe_allow_html=True)
+    with space4:
+        st.markdown('<h1 style="font-size: 25px;">DISTRIBUTION</h1>', unsafe_allow_html=True)
+    with space5:
+        st.markdown('<h1 style="font-size: 25px;">SET PIECE</h1>', unsafe_allow_html=True)
+ 
