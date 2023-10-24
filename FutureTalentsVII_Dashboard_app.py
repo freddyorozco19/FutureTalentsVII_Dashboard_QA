@@ -1395,7 +1395,7 @@ if selected == "Player Search":
         #Team_Lst = df['Team'].drop_duplicates().tolist()
         #Metric_Lst = columnsevents
         #MetricSel = st.selectbox("Choose metric:", Metric_Lst)
-    st.markdown("""----""")
+    
     space0, space1, space2 = st.columns((0.6, 0.6, 0.6))
     with space0:
         st.markdown('<h1 style="font-size: 25px;">OFFENSIVE</h1>', unsafe_allow_html=True)
@@ -1410,4 +1410,4 @@ if selected == "Player Search":
         st.markdown('<h1 style="font-size: 25px;">DISTRIBUTION</h1>', unsafe_allow_html=True)
     with space5:
         st.markdown('<h1 style="font-size: 25px;">SET PIECE</h1>', unsafe_allow_html=True)
- 
+    st.divider()
