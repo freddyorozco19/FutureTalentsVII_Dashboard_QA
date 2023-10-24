@@ -1396,3 +1396,10 @@ if selected == "Player Search":
         #Metric_Lst = columnsevents
         #MetricSel = st.selectbox("Choose metric:", Metric_Lst)
     st.markdown("""----""")
+    space0, space1, space2 = st.columns((0.6, 0.6, 0.6))
+    with space0:
+        st.markdown('<h1 style="font-size: 25px;">OFFENSIVE</h1>', unsafe_allow_html=True)
+    with space1:
+        st.markdown('<h1 style="font-size: 25px;">DEFENSIVE</h1>', unsafe_allow_html=True)
+    with space2:
+        st.markdown('<h1 style="font-size: 25px;">POSSESION</h1>', unsafe_allow_html=True)
