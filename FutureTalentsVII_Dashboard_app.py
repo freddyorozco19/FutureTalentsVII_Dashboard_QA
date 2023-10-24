@@ -33,7 +33,7 @@ from streamlit_option_menu import option_menu
 from datetime import datetime
 
 #make it look nice from the start
-st.set_page_config(layout='wide', page_title='Future Talents VII - Dashboard')
+st.set_page_config(layout='wide', page_title='Future Talents VII - Dashboard', initial_sidebar_state='collapsed')
 
 #####################################################################################################################################################
 
