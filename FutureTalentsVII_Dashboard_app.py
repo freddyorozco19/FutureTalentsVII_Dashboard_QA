@@ -428,7 +428,7 @@ df = df_backup5
 dftotalduels = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
 dftotalduels.columns = ['PlayerID', 'Team', 'Total Duels']
 dftotalduels = dftotalduels.sort_values('Total Duels', ascending=False)
-####AERIAL DUELS FILTER)####
+####AERIAL DUELS (FILTER)####
 df = dfORIGINAL
 df = df[(df['Action'] == 'Aerial duel')].reset_index(drop=True)
 df_backup6 = df
@@ -437,6 +437,15 @@ df = df_backup6
 dftotalaerialduels = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
 dftotalaerialduels.columns = ['PlayerID', 'Team', 'Total Aerial Duels']
 dftotalaerialduels = dftotalaerialduels.sort_values('Total Aerial Duels', ascending=False)
+####ANTICIPATIONS (FILTER)####
+df = dfORIGINAL
+df = df[(df['Action'] == 'Anticipation')].reset_index(drop=True)
+df_backup7 = df
+##TOTAL ANTICIPATIONS##
+df = df_backup7
+dftotalanticipations = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
+dftotalanticipations.columns = ['PlayerID', 'Team', 'Total Anticipations']
+dftotalanticipations = dftotalanticipations.sort_values('Total Anticipations', ascending=False)
 ######JOIN DATAFRAMES######
 dfTotalA = dfprgB.merge(dfpatofithB[['PlayerID', 'Total Passes to Final Third', 'Successful Passes to Final Third', 'Unsuccessful Passes to Final Third', '% Successful Passes to Final Third']], on='PlayerID', how='outer')
 dfTotalB = dfTotalA.merge(dfpasspenareaB[['PlayerID', 'Total Passes to Penalty Area', 'Successful Passes to Penalty Area', 'Unsuccessful Passes to Penalty Area', '% Successful Passes to Penalty Area']], on='PlayerID', how='outer')
@@ -451,9 +460,10 @@ dfTotalJ = dfTotalI.merge(dfcarriestopenarea[['PlayerID', 'Carries to Penalty Ar
 dfTotalK = dfTotalJ.merge(dftotalshots[['PlayerID', 'Total Shots']], on='PlayerID', how='outer')
 dfTotalL = dfTotalK.merge(dftotalduels[['PlayerID', 'Total Duels']], on='PlayerID', how='outer')
 dfTotalM = dfTotalL.merge(dftotalaerialduels[['PlayerID', 'Total Aerial Duels']], on='PlayerID', how='outer')
+dfTotalN = dfTotalM.merge(dftotalanticipations[['PlayerID', 'Total Anticipations']], on='PlayerID', how='outer')
 
 #st.write(dfTotalL)
-merged_df = event_counts2.reset_index().merge(dfTotalM, on='PlayerID', how='outer')
+merged_df = event_counts2.reset_index().merge(dfTotalN, on='PlayerID', how='outer')
 df = merged_df
 #dfMERGE = df
 df = df.fillna(0)
@@ -497,9 +507,9 @@ if selected == "Rankings":
     #st.write(len(event_counts))
     st.markdown("""----""")
     metricsearchbox01, metricsearchbox02, metricsearchbox03 = st.columns(3)
-    GroupOpt_Defensive = ['Aerial duel - Lost', 'Aerial duel - Won', 'Allow crosses - ', 'Anticipation - Complete', 'Anticipation - Half', 'Block - Cross', 'Block - Shot', 'Clearance - ', 'Coverage - Complete', 'Coverage - Half', 'Interception - Complete', 'Interception - Half', 'Tackles - Lost', 'Tackles - Won', 'Recovery - ', 'Loses the mark - Normal', 'Loses the mark - Severity']
+    GroupOpt_Defensive = ['Total Anticipations', 'Anticipation - Complete', 'Anticipation - Half', 'Allow crosses - ', 'Block - Cross', 'Block - Shot', 'Clearance - ', 'Coverage - Complete', 'Coverage - Half', 'Interception - Complete', 'Interception - Half', 'Tackles - Lost', 'Tackles - Won', 'Recovery - ', 'Loses the mark - Normal', 'Loses the mark - Severity']
     GroupOpt_Offensive = ['Total Shots', 'Shot - Goal', 'Shot - On target', 'Shot - Wide', 'Shot - Post', 'Touches in Penalty Area']
-    GroupOpt_Possesion = ['Total Duels', 'Duel - Won', 'Duel - Lost', 'Total Aerial Duels', 'Touches', 'Touches in Final Third', 'Total Carries', 'Carries to Second Half', 'Carries to Final Third', 'Carries to Penalty Area', 'Carries - Ball', 'Carries - To space', 'Take-ons - Won', 'Take-ons - Lost', 'Received pass']
+    GroupOpt_Possesion = ['Total Duels', 'Duel - Won', 'Duel - Lost', 'Total Aerial Duels', 'Aerial duel - Lost', 'Aerial duel - Won', 'Touches', 'Touches in Final Third', 'Total Carries', 'Carries to Second Half', 'Carries to Final Third', 'Carries to Penalty Area', 'Carries - Ball', 'Carries - To space', 'Take-ons - Won', 'Take-ons - Lost', 'Received pass']
     GroupOpt_Distribut = ['Pass - Complete', 'Pass - Miss', 'Type pass - Assist', 'Type pass - Key', 'Type pass - Second assist', 'Total Progressive Passes', 'Successful Progressive Passes', 'Unsuccessful Progressive Passes', '% Successful Progressive Passes', 'Total Passes to Final Third', 'Successful Passes to Final Third', 'Unsuccessful Passes to Final Third', '% Successful Passes to Final Third', 'Total Passes to Penalty Area', 'Successful Passes to Penalty Area', 'Unsuccessful Passes to Penalty Area', '% Successful Passes to Penalty Area', 'Total Long Passes', 'Successful Long Passes', 'Unsuccessful Long Passes', '% Successful Long Passes']
     GroupOpt_SetPieces = ['Corner - Complete', 'Corner - Miss', 'Free kick - Complete', 'Free kick - Miss', 'Free kick - Shot', 'Throw-in - ', 'Throw-in - Complete', 'Throw-in - Miss']
     with metricsearchbox01:
@@ -1402,9 +1412,9 @@ if selected == "Player Search":
     dfofeccc = dfccc[['Total Shots', 'Shot - Goal', 'Shot - On target', 'Touches in Penalty Area']]
     dfofelccc = dfofeccc.columns
     ###FILTRAR POR ACCIONES DEFENSIVAS###
-    dfdef = df[['Anticipation - Complete', 'Clearance - ', 'Coverage - Complete', 'Interception - Complete', 'Tackles - Won', 'Recovery - ']]
+    dfdef = df[['Total Anticipations', 'Anticipation - Complete', 'Clearance - ', 'Coverage - Complete', 'Interception - Complete', 'Tackles - Won', 'Recovery - ']]
     dfdefl = dfdef.columns
-    dfdefccc = dfccc[['Anticipation - Complete', 'Clearance - ', 'Coverage - Complete', 'Interception - Complete', 'Tackles - Won', 'Recovery - ']]
+    dfdefccc = dfccc[['Total Anticipations', 'Anticipation - Complete', 'Clearance - ', 'Coverage - Complete', 'Interception - Complete', 'Tackles - Won', 'Recovery - ']]
     dfdeflccc = dfdefccc.columns
     ###FILTRAR POR ACCIONES DE POSESIÓN###
     dfpos = df[['Total Duels', 'Total Aerial Duels', 'Touches', 'Total Carries', 'Received pass - ']]
