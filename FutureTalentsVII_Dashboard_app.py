@@ -1396,37 +1396,63 @@ if selected == "Player Search":
     df = pd.read_excel("MatchesData/MetricsData_FutureTalentsVII.xlsx")
     dfccc = df
     df = df[df['Name'] == PlayerSel].reset_index(drop=True)
+    ###FILTRAR POR ACCIONES OFENSIVAS###
     dfofe = df[['Total Shots', 'Shot - Goal', 'Shot - On target', 'Touches in Penalty Area']]
     dfofel = dfofe.columns
     dfofeccc = dfccc[['Total Shots', 'Shot - Goal', 'Shot - On target', 'Touches in Penalty Area']]
     dfofelccc = dfofeccc.columns
+    ###FILTRAR POR ACCIONES DEFENSIVAS###
+    dfdef = df[['Anticipation - Complete', 'Clearance', 'Coverage - Complete', 'Interception - Complete', 'Tackles - Won', 'Recovery - ']]
+    dfdefl = dfdef.columns
+    dfdefccc = dfccc[['Anticipation - Complete', 'Clearance', 'Coverage - Complete', 'Interception - Complete', 'Tackles - Won', 'Recovery - ']]
+    dfdeflccc = dfdefccc.columns
+    ###FILTRAR POR ACCIONES DE POSESIÓN###
     dfpos = df[['Total Duels', 'Total Aerial Duels', 'Touches', 'Total Carries', 'Received pass - ']]
     dfposl = dfpos.columns
     dfposccc = dfccc[['Total Duels', 'Total Aerial Duels', 'Touches', 'Total Carries', 'Received pass - ']]
     dfposlccc = dfposccc.columns
-    #Obtener valores minimos y máximos de métricas de ofensiva
+    ###Obtener valores minimos y máximos de métricas ofensivas
     lowwofe = []
     highhofe = []
     for an in range(len(dfofeccc.columns)):
       lowwofe.append(min(dfofeccc.iloc[:,an]))
       highhofe.append(max(dfofeccc.iloc[:,an]))
-    #Obtener valores minimos y máximos de métricas de posesión        
+    ###Obtener valores minimos y máximos de métricas defensivas
+    lowwdef = []
+    highhdef = []
+    for an in range(len(dfdefccc.columns)):
+      lowwdef.append(min(dfdefccc.iloc[:,an]))
+      highhdef.append(max(dfdefccc.iloc[:,an]))
+    ###Obtener valores minimos y máximos de métricas de posesión        
     lowwpos = []
     highhpos = []
     for an in range(len(dfposccc.columns)):
         lowwpos.append(min(dfposccc.iloc[:,an]))
         highhpos.append(max(dfposccc.iloc[:,an]))
+    ###
     rangparamofe = len(dfofelccc)
+    rangparamofe = len(dfdeflccc)
     rangparampos = len(dfposlccc)
     #Valores por acciones de ofensiva
     valuessofe = dfofe.iloc[0,:]
     valuessofe2 = round(dfofeccc.mean(), 2)
+    #Valores por acciones de ofensiva
+    valuessdef = dfdef.iloc[0,:]
+    valuessdef2 = round(dfdefccc.mean(), 2)
     #Valores por acciones de posesión
     valuesspos = dfpos.iloc[0,:]
     valuesspos2 = round(dfposccc.mean(), 2)
     radarofe = Radar(dfofelccc, lowwofe, highhofe,
                   # whether to round any of the labels to integers instead of decimal places
                   round_int=[False]*rangparamofe,
+                  num_rings=4,  # the number of concentric circles (excluding center circle)
+                  # if the ring_width is more than the center_circle_radius then
+                  # the center circle radius will be wider than the width of the concentric circles
+                  ring_width=1, center_circle_radius=1)
+    #Radar defensivo
+    radardef = Radar(dfdeflccc, lowwdef, highhdef,
+                  # whether to round any of the labels to integers instead of decimal places
+                  round_int=[False]*rangparamdef,
                   num_rings=4,  # the number of concentric circles (excluding center circle)
                   # if the ring_width is more than the center_circle_radius then
                   # the center circle radius will be wider than the width of the concentric circles
@@ -1445,12 +1471,7 @@ if selected == "Player Search":
     alpharradar1 = 0.5
     alpharradar2 = 0.5
     
-    #st.write(dfofe)
-    
-    st.write(valuessofe)
-    st.write(valuessofe2)
-    st.write(lowwofe)
-    st.write(highhofe)
+ 
     metricplayerbox01, metricplayerbox02, metricplayerbox03 = st.columns(3)
     #with metricplayerbox01:
         #Team_Lst = df['Team'].drop_duplicates().tolist()
@@ -1489,7 +1510,33 @@ if selected == "Player Search":
     
         st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=600, format="png")   
     with space1:
+        fig, ax = radardef.setup_axis()  # format axis as a radar
+        fig.set_facecolor('#050E1E')
+        fig.set_dpi(600)
         st.markdown('<h1 style="font-size: 25px;">DEFENSIVE</h1>', unsafe_allow_html=True)
+        rings_inner = radardef.draw_circles(ax=ax, facecolor=(1,1,1,0), edgecolor='#222229')  # draw circles
+        radar_output = radardef.draw_radar_compare(valuessdef, valuessdef2, ax=ax,
+                                                kwargs_radar={'facecolor': colorradar1, 'alpha' : alpharradar1},
+                                                kwargs_compare={'facecolor': colorradar2, 'alpha' : alpharradar2},
+                                                )  # draw the radar
+        radar_poly, radar_poly2, vertices, vertices2 = radar_output
+        # range_labels = radar.draw_range_labels(ax=ax, fontsize=18,
+        #                                        fontproperties=prop)  # draw the range labels
+        param_labels = radardef.draw_param_labels(ax=ax, fontsize=15, color=(1,1,1,0.8),
+                                               fontproperties=prop2)  # draw the param labels
+    
+        vert = vertices.tolist()
+        dfver = pd.DataFrame(vert, columns=['X', 'Y'])
+        uno = dfver['X'].tolist()
+        dos = dfver['Y'].tolist()
+    
+        ax.scatter(vertices[:, 0], vertices[:, 1], c=colorradar1, edgecolors='#050E1E', s=120, alpha=alpharradar1)
+        ax.scatter(vertices2[:, 0], vertices2[:, 1], c=colorradar2, edgecolors='#050E1E', s=120, alpha=alpharradar2)
+    
+        #st.write(lowwdef)
+        #st.write(highhdef)
+    
+        st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=600, format="png")
     with space2:
         fig, ax = radarpos.setup_axis()  # format axis as a radar
         fig.set_facecolor('#050E1E')
