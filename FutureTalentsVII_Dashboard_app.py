@@ -1404,44 +1404,45 @@ if selected == "Player Search":
     ###FILTRAR POR ACCIONES DEFENSIVAS###
     dfdef = df[['Anticipation - Complete', 'Clearance', 'Coverage - Complete', 'Interception - Complete', 'Tackles - Won', 'Recovery - ']]
     dfdefl = dfdef.columns
-    dfdefccc = dfccc[['Anticipation - Complete', 'Clearance', 'Coverage - Complete', 'Interception - Complete', 'Tackles - Won', 'Recovery - ']]
+    dfdefccc = dfccc[['Anticipation - Complete', 'Clearance - ', 'Coverage - Complete', 'Interception - Complete', 'Tackles - Won', 'Recovery - ']]
     dfdeflccc = dfdefccc.columns
     ###FILTRAR POR ACCIONES DE POSESIÓN###
     dfpos = df[['Total Duels', 'Total Aerial Duels', 'Touches', 'Total Carries', 'Received pass - ']]
     dfposl = dfpos.columns
     dfposccc = dfccc[['Total Duels', 'Total Aerial Duels', 'Touches', 'Total Carries', 'Received pass - ']]
     dfposlccc = dfposccc.columns
-    ###Obtener valores minimos y máximos de métricas ofensivas
+    ###OBTENER MINIMOS Y MÁXIMOS MÉTRICAS OFENSIVAS###
     lowwofe = []
     highhofe = []
     for an in range(len(dfofeccc.columns)):
       lowwofe.append(min(dfofeccc.iloc[:,an]))
       highhofe.append(max(dfofeccc.iloc[:,an]))
-    ###Obtener valores minimos y máximos de métricas defensivas
+    ###OBTENER MINIMOS Y MÁXIMOS MÉTRICAS DEFENSIVAS###
     lowwdef = []
     highhdef = []
     for an in range(len(dfdefccc.columns)):
       lowwdef.append(min(dfdefccc.iloc[:,an]))
       highhdef.append(max(dfdefccc.iloc[:,an]))
-    ###Obtener valores minimos y máximos de métricas de posesión        
+    ###OBTENER MINIMOS Y MÁXIMOS MÉTRICAS POSESIÓN###    
     lowwpos = []
     highhpos = []
     for an in range(len(dfposccc.columns)):
         lowwpos.append(min(dfposccc.iloc[:,an]))
         highhpos.append(max(dfposccc.iloc[:,an]))
-    ###
+    ###RANGO DE MÉTRICAS###
     rangparamofe = len(dfofelccc)
     rangparamofe = len(dfdeflccc)
     rangparampos = len(dfposlccc)
-    #Valores por acciones de ofensiva
+    ###VALORES MÉTRICAS OFENSIVAS###
     valuessofe = dfofe.iloc[0,:]
     valuessofe2 = round(dfofeccc.mean(), 2)
-    #Valores por acciones de ofensiva
+    ###VALORES MÉTRICAS DEFENSIVAS###
     valuessdef = dfdef.iloc[0,:]
     valuessdef2 = round(dfdefccc.mean(), 2)
-    #Valores por acciones de posesión
+    ###VALORES MÉTRICAS POSESIÓN###
     valuesspos = dfpos.iloc[0,:]
     valuesspos2 = round(dfposccc.mean(), 2)
+    ###RADAR MÉTRICAS OFENSIVAS###
     radarofe = Radar(dfofelccc, lowwofe, highhofe,
                   # whether to round any of the labels to integers instead of decimal places
                   round_int=[False]*rangparamofe,
@@ -1449,7 +1450,7 @@ if selected == "Player Search":
                   # if the ring_width is more than the center_circle_radius then
                   # the center circle radius will be wider than the width of the concentric circles
                   ring_width=1, center_circle_radius=1)
-    #Radar defensivo
+    ###RADAR MÉTRICAS DEFENSIVAS###
     radardef = Radar(dfdeflccc, lowwdef, highhdef,
                   # whether to round any of the labels to integers instead of decimal places
                   round_int=[False]*rangparamdef,
@@ -1457,7 +1458,7 @@ if selected == "Player Search":
                   # if the ring_width is more than the center_circle_radius then
                   # the center circle radius will be wider than the width of the concentric circles
                   ring_width=1, center_circle_radius=1)
-    #Radar de posesión
+    ###RADAR MÉTRICAS POSESIÓN###
     radarpos = Radar(dfposlccc, lowwpos, highhpos,
                   # whether to round any of the labels to integers instead of decimal places
                   round_int=[False]*rangparampos,
