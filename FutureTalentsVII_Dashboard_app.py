@@ -1443,7 +1443,7 @@ if selected == "Player Search":
     colorradar1 = "#FF0046"
     colorradar2 = "#9F9F9F"
     alpharradar1 = 0.5
-    alpharradar2 = 0.5
+    alpharradar2 = 1.0
     
     #st.write(dfofe)
     
