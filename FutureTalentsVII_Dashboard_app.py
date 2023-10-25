@@ -1399,6 +1399,7 @@ if selected == "Player Search":
     dfpos = df[['Total Duels', 'Total Aerial Duels', 'Touches', 'Total Carries', 'Received pass - ']]
     dfposl = dfpos.columns
     valuessofe = dfofe.iloc[0,:]
+    valuessofe2 = round(dfofe.mean(), 2)
     lowwofe = []
     highhofe = []
     for an in range(len(dfofe.columns)):
