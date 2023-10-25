@@ -482,6 +482,51 @@ df = df_backup11
 dftotaltackles = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
 dftotaltackles.columns = ['PlayerID', 'Team', 'Total Tackles']
 dftotaltackles = dftotaltackles.sort_values('Total Tackles', ascending=False)
+####PASSES (FILTER)####
+df = dfORIGINAL
+df = df[(df['Action'] == 'Pass')].reset_index(drop=True)
+df_backup12 = df
+##TOTAL PASSES##
+df = df_backup12
+dftotalpasses = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
+dftotalpasses.columns = ['PlayerID', 'Team', 'Total Passes']
+dftotalpasses = dftotalpasses.sort_values('Total Passes', ascending=False)
+####TYPE PASSES (FILTER)####
+df = dfORIGINAL
+df = df[(df['Action'] == 'Type pass')].reset_index(drop=True)
+df_backup13 = df
+##TOTAL TYPE PASSES##
+df = df_backup13
+dftotaltypepasses = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
+dftotaltypepasses.columns = ['PlayerID', 'Team', 'Total Type Passes']
+dftotaltypepasses = dftotaltypepasses.sort_values('Total Type Passes', ascending=False)
+####PRESSURES (FILTER)####
+df = dfORIGINAL
+df = df[(df['Action'] == 'Pressure')].reset_index(drop=True)
+df_backup14 = df
+##TOTAL PRESSURES##
+df = df_backup14
+dftotalpressures = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
+dftotalpressures.columns = ['PlayerID', 'Team', 'Total Pressures']
+dftotalpressures = dftotalpressures.sort_values('Total Pressures', ascending=False)
+####SHOT AGAINST (FILTER)####
+df = dfORIGINAL
+df = df[(df['Action'] == 'Shot against')].reset_index(drop=True)
+df_backup15 = df
+##TOTAL SHOT AGAINST##
+df = df_backup15
+dftotalshotagainst = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
+dftotalshotagainst.columns = ['PlayerID', 'Team', 'Total Shot Against']
+dftotalshotagainst = dftotalshotagainst.sort_values('Total Shot Against', ascending=False)
+####TAKE-ONS (FILTER)####
+df = dfORIGINAL
+df = df[(df['Action'] == 'Take-ons')].reset_index(drop=True)
+df_backup16 = df
+##TOTAL TAKE-ONS##
+df = df_backup16
+dftotaltakeons = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
+dftotaltakeons.columns = ['PlayerID', 'Team', 'Total Take-ons']
+dftotaltakeons = dftotaltakeons.sort_values('Total Take-ons', ascending=False)
 
 ######JOIN DATAFRAMES######
 dfTotalA = dfprgB.merge(dfpatofithB[['PlayerID', 'Total Passes to Final Third', 'Successful Passes to Final Third', 'Unsuccessful Passes to Final Third', '% Successful Passes to Final Third']], on='PlayerID', how='outer')
@@ -502,8 +547,14 @@ dfTotalO = dfTotalN.merge(dftotalblocks[['PlayerID', 'Total Blocks']], on='Playe
 dfTotalP = dfTotalO.merge(dftotalinterceptions[['PlayerID', 'Total Interceptions']], on='PlayerID', how='outer')
 dfTotalQ = dfTotalP.merge(dftotalcoverages[['PlayerID', 'Total Coverages']], on='PlayerID', how='outer')
 dfTotalR = dfTotalQ.merge(dftotaltackles[['PlayerID', 'Total Tackles']], on='PlayerID', how='outer')
+dfTotalS = dfTotalR.merge(dftotalpasses[['PlayerID', 'Total Passes']], on='PlayerID', how='outer')
+dfTotalT = dfTotalS.merge(dftotaltypepasses[['PlayerID', 'Total Type Passes']], on='PlayerID', how='outer')
+dfTotalU = dfTotalT.merge(dftotalpressures[['PlayerID', 'Total Pressures']], on='PlayerID', how='outer')
+dfTotalV = dfTotalU.merge(dftotalshotagainst[['PlayerID', 'Total Shot Against']], on='PlayerID', how='outer')
+dfTotalW = dfTotalV.merge(dftotaltakeons[['PlayerID', 'Total Take-ons']], on='PlayerID', how='outer')
+
 #st.write(dfTotalL)
-merged_df = event_counts2.reset_index().merge(dfTotalR, on='PlayerID', how='outer')
+merged_df = event_counts2.reset_index().merge(dfTotalW, on='PlayerID', how='outer')
 df = merged_df
 #dfMERGE = df
 df = df.fillna(0)
