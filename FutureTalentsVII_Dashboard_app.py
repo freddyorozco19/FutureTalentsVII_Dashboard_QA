@@ -1421,7 +1421,35 @@ if selected == "Player Search":
     
     space0, space1, space2 = st.columns((0.6, 0.6, 0.6))
     with space0:
+
+        fig, ax = radarofe.setup_axis()  # format axis as a radar
+        fig.set_facecolor('#050E1E')
+        fig.set_dpi(600)
         st.markdown('<h1 style="font-size: 25px;">OFFENSIVE</h1>', unsafe_allow_html=True)
+    
+        rings_inner = radarofe.draw_circles(ax=ax, facecolor=(1,1,1,0), edgecolor='#222229')  # draw circles
+        radar_output = radarofe.draw_radar_compare(valuessofe, valuessofe2, ax=ax,
+                                                kwargs_radar={'facecolor': colorradar1, 'alpha' : alpharradar1},
+                                                kwargs_compare={'facecolor': colorradar2, 'alpha' : alpharradar2},
+                                                )  # draw the radar
+        radar_poly, radar_poly2, vertices, vertices2 = radar_output
+        # range_labels = radar.draw_range_labels(ax=ax, fontsize=18,
+        #                                        fontproperties=prop)  # draw the range labels
+        param_labels = radarofe.draw_param_labels(ax=ax, fontsize=15, color=(1,1,1,0.8),
+                                               fontproperties=prop2)  # draw the param labels
+    
+        vert = vertices.tolist()
+        dfver = pd.DataFrame(vert, columns=['X', 'Y'])
+        uno = dfver['X'].tolist()
+        dos = dfver['Y'].tolist()
+    
+        ax.scatter(vertices[:, 0], vertices[:, 1], c=colorradar1, edgecolors='#050E1E', s=120, alpha=alpharradar1, zorder=-1)
+        ax.scatter(vertices2[:, 0], vertices2[:, 1], c=colorradar2, edgecolors='#050E1E', s=120, alpha=alpharradar2, zorder=-1)
+    
+        #st.write(lowwofe)
+        #st.write(highhofe)
+    
+        st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=600, format="png")   
     with space1:
         st.markdown('<h1 style="font-size: 25px;">DEFENSIVE</h1>', unsafe_allow_html=True)
     with space2:
