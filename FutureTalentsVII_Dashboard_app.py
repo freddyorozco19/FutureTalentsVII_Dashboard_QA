@@ -1402,7 +1402,7 @@ if selected == "Player Search":
     dfofeccc = dfccc[['Total Shots', 'Shot - Goal', 'Shot - On target', 'Touches in Penalty Area']]
     dfofelccc = dfofeccc.columns
     ###FILTRAR POR ACCIONES DEFENSIVAS###
-    dfdef = df[['Anticipation - Complete', 'Clearance', 'Coverage - Complete', 'Interception - Complete', 'Tackles - Won', 'Recovery - ']]
+    dfdef = df[['Anticipation - Complete', 'Clearance - ', 'Coverage - Complete', 'Interception - Complete', 'Tackles - Won', 'Recovery - ']]
     dfdefl = dfdef.columns
     dfdefccc = dfccc[['Anticipation - Complete', 'Clearance - ', 'Coverage - Complete', 'Interception - Complete', 'Tackles - Won', 'Recovery - ']]
     dfdeflccc = dfdefccc.columns
