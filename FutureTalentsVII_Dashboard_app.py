@@ -1394,35 +1394,39 @@ if selected == "Player Search":
     
     ###SEGMENTAR POR GRUPO DE MÉTRICAS###
     df = pd.read_excel("MatchesData/MetricsData_FutureTalentsVII.xlsx")
-    st.dataframe(df)
-    
-    #df = df[df['P
+    dfccc = df
+    df = df[df['Name'] == PlayerSel].reset_index(drop=True)
     dfofe = df[['Total Shots', 'Shot - Goal', 'Shot - On target', 'Touches in Penalty Area']]
     dfofel = dfofe.columns
+    dfofeccc = dfccc[['Total Shots', 'Shot - Goal', 'Shot - On target', 'Touches in Penalty Area']]
+    dfofelccc = dfofeccc.columns
     dfpos = df[['Total Duels', 'Total Aerial Duels', 'Touches', 'Total Carries', 'Received pass - ']]
     dfposl = dfpos.columns
+    dfposccc = dfccc[['Total Duels', 'Total Aerial Duels', 'Touches', 'Total Carries', 'Received pass - ']]
+    dfposlccc = dfposccc.columns
     lowwofe = []
     highhofe = []
-    for an in range(len(dfofe.columns)):
-      lowwofe.append(min(dfofe.iloc[:,an]))
-      highhofe.append(max(dfofe.iloc[:,an]))
-    rangparamofe = len(dfofel)
-    radarofe = Radar(dfofel, lowwofe, highhofe,
+    for an in range(len(dfofeccc.columns)):
+      lowwofe.append(min(dfofeccc.iloc[:,an]))
+      highhofe.append(max(dfofeccc.iloc[:,an]))
+    rangparamofe = len(dfofelccc)
+    valuessofe = dfofe.iloc[0,:]
+    valuessofe2 = round(dfofeccc.mean(), 2)
+    radarofe = Radar(dfofelccc, lowwofe, highhofe,
                   # whether to round any of the labels to integers instead of decimal places
                   round_int=[False]*rangparamofe,
                   num_rings=4,  # the number of concentric circles (excluding center circle)
                   # if the ring_width is more than the center_circle_radius then
                   # the center circle radius will be wider than the width of the concentric circles
                   ring_width=1, center_circle_radius=1)
-
+    
     colorradar1 = "#FF0046"
     colorradar2 = "#005CBE"
     alpharradar1 = 0.5
     alpharradar2 = 0.5
-    df = df[df['Name'] == PlayerSel].reset_index(drop=True)
-    st.write(dfofe)
-    valuessofe = dfofe.iloc[0,:]
-    valuessofe2 = round(dfofe.mean(), 2)
+    
+    #st.write(dfofe)
+    
     st.write(valuessofe)
     st.write(valuessofe2)
     st.write(lowwofe)
