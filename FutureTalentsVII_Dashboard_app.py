@@ -499,7 +499,7 @@ dfTotalL = dfTotalK.merge(dftotalduels[['PlayerID', 'Total Duels']], on='PlayerI
 dfTotalM = dfTotalL.merge(dftotalaerialduels[['PlayerID', 'Total Aerial Duels']], on='PlayerID', how='outer')
 dfTotalN = dfTotalM.merge(dftotalanticipations[['PlayerID', 'Total Anticipations']], on='PlayerID', how='outer')
 dfTotalO = dfTotalN.merge(dftotalblocks[['PlayerID', 'Total Blocks']], on='PlayerID', how='outer')
-dfTotalP = dfTotalO.merge(dftotainterceptions[['PlayerID', 'Total Interceptions']], on='PlayerID', how='outer')
+dfTotalP = dfTotalO.merge(dftotalinterceptions[['PlayerID', 'Total Interceptions']], on='PlayerID', how='outer')
 dfTotalQ = dfTotalP.merge(dftotalcoverages[['PlayerID', 'Total Coverages']], on='PlayerID', how='outer')
 dfTotalR = dfTotalQ.merge(dftotaltackles[['PlayerID', 'Total Tackles']], on='PlayerID', how='outer')
 #st.write(dfTotalL)
