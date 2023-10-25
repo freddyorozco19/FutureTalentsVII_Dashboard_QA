@@ -1431,7 +1431,7 @@ if selected == "Player Search":
         highhpos.append(max(dfposccc.iloc[:,an]))
     ###RANGO DE MÉTRICAS###
     rangparamofe = len(dfofelccc)
-    rangparamofe = len(dfdeflccc)
+    rangparamdef = len(dfdeflccc)
     rangparampos = len(dfposlccc)
     ###VALORES MÉTRICAS OFENSIVAS###
     valuessofe = dfofe.iloc[0,:]
