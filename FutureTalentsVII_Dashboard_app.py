@@ -1470,7 +1470,7 @@ if selected == "Player Search":
     colorradar1 = "#FF0046"
     colorradar2 = "#333333"
     alpharradar1 = 0.5
-    alpharradar2 = 0.5
+    alpharradar2 = 0.7
     
  
     metricplayerbox01, metricplayerbox02, metricplayerbox03 = st.columns(3)
