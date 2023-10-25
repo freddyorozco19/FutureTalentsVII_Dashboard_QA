@@ -1391,6 +1391,7 @@ if selected == "Player Search":
              st.dataframe(df)
              
     st.divider()
+    st.dataframe(df)
     ###SEGMENTAR POR GRUPO DE MÉTRICAS###
     dfofe = df[['Total Shots', 'Touches in Penalty Area']]
     dfofel = dfofe.columns
@@ -1411,7 +1412,7 @@ if selected == "Player Search":
                   # the center circle radius will be wider than the width of the concentric circles
                   ring_width=1, center_circle_radius=1)
 
-    st.dataframe(df)
+    
     metricplayerbox01, metricplayerbox02, metricplayerbox03 = st.columns(3)
     #with metricplayerbox01:
         #Team_Lst = df['Team'].drop_duplicates().tolist()
