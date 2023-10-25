@@ -1422,6 +1422,9 @@ if selected == "Player Search":
     alpharradar1 = 0.5
     alpharradar2 = 0.5
     st.write(valuessofe)
+    st.write(valuessofe2)
+    st.write(lowwofe)
+    st.write(highhofe)
     metricplayerbox01, metricplayerbox02, metricplayerbox03 = st.columns(3)
     #with metricplayerbox01:
         #Team_Lst = df['Team'].drop_duplicates().tolist()
