@@ -1445,6 +1445,7 @@ if selected == "Player Search":
     st.write(len(dfofelccc))
     st.write(len(lowwofe))
     st.write(len(highhofe))
+    st.write(len(rangparamofe))
     ###RADAR MÉTRICAS OFENSIVAS###
     radarofe = Radar(dfofelccc, lowwofe, highhofe,
                   # whether to round any of the labels to integers instead of decimal places
