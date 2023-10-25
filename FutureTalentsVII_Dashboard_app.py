@@ -1405,7 +1405,7 @@ if selected == "Player Search":
       lowwofe.append(min(dfofe.iloc[:,an]))
       highhofe.append(max(dfofe.iloc[:,an]))
     rangparamofe = len(dfofel)
-    radarofe = Radar(dfofelccc, lowwofe, highhofe,
+    radarofe = Radar(dfofel, lowwofe, highhofe,
                   # whether to round any of the labels to integers instead of decimal places
                   round_int=[False]*rangparamofe,
                   num_rings=4,  # the number of concentric circles (excluding center circle)
