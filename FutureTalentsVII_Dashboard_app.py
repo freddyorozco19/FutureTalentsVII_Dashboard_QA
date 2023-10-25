@@ -1395,14 +1395,12 @@ if selected == "Player Search":
     ###SEGMENTAR POR GRUPO DE MÉTRICAS###
     df = pd.read_excel("MatchesData/MetricsData_FutureTalentsVII.xlsx")
     st.dataframe(df)
-    df = df[df['Name'] == PlayerSel].reset_index(drop=True)
+    
     #df = df[df['P
     dfofe = df[['Total Shots', 'Shot - Goal', 'Shot - On target', 'Touches in Penalty Area']]
     dfofel = dfofe.columns
     dfpos = df[['Total Duels', 'Total Aerial Duels', 'Touches', 'Total Carries', 'Received pass - ']]
     dfposl = dfpos.columns
-    valuessofe = dfofe.iloc[0,:]
-    valuessofe2 = round(dfofe.mean(), 2)
     lowwofe = []
     highhofe = []
     for an in range(len(dfofe.columns)):
@@ -1421,6 +1419,10 @@ if selected == "Player Search":
     colorradar2 = "#005CBE"
     alpharradar1 = 0.5
     alpharradar2 = 0.5
+    df = df[df['Name'] == PlayerSel].reset_index(drop=True)
+    st.write(dfofe)
+    valuessofe = dfofe.iloc[0,:]
+    valuessofe2 = round(dfofe.mean(), 2)
     st.write(valuessofe)
     st.write(valuessofe2)
     st.write(lowwofe)
