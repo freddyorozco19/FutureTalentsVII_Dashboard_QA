@@ -1557,6 +1557,7 @@ if selected == "Player Search":
     rangparamofe = len(dfofelccc)
     rangparamdef = len(dfdeflccc)
     rangparampos = len(dfposlccc)
+    rangparamcre = len(dfcrelccc)
     ###VALORES MÉTRICAS OFENSIVAS###
     valuessofe = dfofe.iloc[0,:]
     valuessofe2 = round(dfofeccc.mean(), 2)
