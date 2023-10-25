@@ -1411,6 +1411,8 @@ if selected == "Player Search":
     dfposl = dfpos.columns
     dfposccc = dfccc[['Total Duels', 'Total Aerial Duels', 'Touches', 'Total Carries', 'Received pass - ']]
     dfposlccc = dfposccc.columns
+    ###FILTRAR POR ACCIONES DE CREACIÓN###
+    #dfcre = 
     ###OBTENER MINIMOS Y MÁXIMOS MÉTRICAS OFENSIVAS###
     lowwofe = []
     highhofe = []
@@ -1468,7 +1470,7 @@ if selected == "Player Search":
                   ring_width=1, center_circle_radius=1)
     
     colorradar1 = "#FF0046"
-    colorradar2 = "#333333"
+    colorradar2 = "#444444"
     alpharradar1 = 0.5
     alpharradar2 = 0.7
     
