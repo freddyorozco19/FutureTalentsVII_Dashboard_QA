@@ -1418,6 +1418,7 @@ if selected == "Player Search":
     colorradar2 = "#005CBE"
     alpharradar1 = 0.5
     alpharradar2 = 0.5
+    st.write(valuessofe)
     metricplayerbox01, metricplayerbox02, metricplayerbox03 = st.columns(3)
     #with metricplayerbox01:
         #Team_Lst = df['Team'].drop_duplicates().tolist()
