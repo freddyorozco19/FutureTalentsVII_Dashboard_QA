@@ -527,6 +527,15 @@ df = df_backup16
 dftotaltakeons = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
 dftotaltakeons.columns = ['PlayerID', 'Team', 'Total Take-ons']
 dftotaltakeons = dftotaltakeons.sort_values('Total Take-ons', ascending=False)
+####FOULS DRAWN (FILTER)####
+df = dfORIGINAL
+df = df[(df['Action'] == 'Foul drawn')].reset_index(drop=True)
+df_backup17 = df
+##TOTAL FOULS DRAWN##
+df = df_backup17
+dftotalfoulsdrawn = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
+dftotalfoulsdrawn.columns = ['PlayerID', 'Team', 'Total Fouls Drawn']
+dftotalfoulsdrawn = dftotalfoulsdrawn.sort_values('Total Fouls Drawn', ascending=False)
 
 ######JOIN DATAFRAMES######
 dfTotalA = dfprgB.merge(dfpatofithB[['PlayerID', 'Total Passes to Final Third', 'Successful Passes to Final Third', 'Unsuccessful Passes to Final Third', '% Successful Passes to Final Third']], on='PlayerID', how='outer')
@@ -552,9 +561,10 @@ dfTotalT = dfTotalS.merge(dftotaltypepasses[['PlayerID', 'Total Type Passes']], 
 dfTotalU = dfTotalT.merge(dftotalpressures[['PlayerID', 'Total Pressures']], on='PlayerID', how='outer')
 dfTotalV = dfTotalU.merge(dftotalshotagainst[['PlayerID', 'Total Shot Against']], on='PlayerID', how='outer')
 dfTotalW = dfTotalV.merge(dftotaltakeons[['PlayerID', 'Total Take-ons']], on='PlayerID', how='outer')
+dfTotalX = dfTotalW.merge(dftotalfoulsdrawn[['PlayerID', 'Total Fouls Drawn']], on='PlayerID', how='outer')
 
 #st.write(dfTotalL)
-merged_df = event_counts2.reset_index().merge(dfTotalW, on='PlayerID', how='outer')
+merged_df = event_counts2.reset_index().merge(dfTotalX, on='PlayerID', how='outer')
 df = merged_df
 #dfMERGE = df
 df = df.fillna(0)
