@@ -31,6 +31,7 @@ from PIL import Image
 from matplotlib.patches import Rectangle
 from streamlit_option_menu import option_menu
 from datetime import datetime
+from radar_chart2 import Radar
 
 #make it look nice from the start
 st.set_page_config(layout='wide', page_title='Future Talents VII - Dashboard', initial_sidebar_state='collapsed')
@@ -1389,7 +1390,28 @@ if selected == "Player Search":
         with pltmain02:
              st.dataframe(df)
              
-    st.markdown("""----""")
+    st.divider()
+    ###SEGMENTAR POR GRUPO DE MÉTRICAS###
+    dfofe = df[['Total Shots', 'Touches in Penalty Area']]
+    dfofel = dfofe.columns
+    dfpos = df[['Toal Duels', 'Total Aerial Duels', 'Touches', 'Total Carries', 'Received pass']]
+    dfposl = dfpos.columns
+    valuessofe = dfofe.iloc[0,:]
+    lowwofe = []
+    highhofe = []
+    for an in range(len(dfofe.columns)):
+      lowwofe.append(min(dfofe.iloc[:,an]))
+      highhofe.append(max(dfofe.iloc[:,an]))
+    rangparamofe = len(dfofel)
+    radarofe = Radar(dfofelccc, lowwofe, highhofe,
+                  # whether to round any of the labels to integers instead of decimal places
+                  round_int=[False]*rangparamofe,
+                  num_rings=4,  # the number of concentric circles (excluding center circle)
+                  # if the ring_width is more than the center_circle_radius then
+                  # the center circle radius will be wider than the width of the concentric circles
+                  ring_width=1, center_circle_radius=1)
+
+    
     metricplayerbox01, metricplayerbox02, metricplayerbox03 = st.columns(3)
     #with metricplayerbox01:
         #Team_Lst = df['Team'].drop_duplicates().tolist()
