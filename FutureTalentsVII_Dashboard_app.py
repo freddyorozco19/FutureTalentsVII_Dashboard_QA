@@ -1468,7 +1468,7 @@ if selected == "Player Search":
                   ring_width=1, center_circle_radius=1)
     
     colorradar1 = "#FF0046"
-    colorradar2 = "#1F1F23"
+    colorradar2 = "#575763"
     alpharradar1 = 0.5
     alpharradar2 = 0.5
     
