@@ -1396,7 +1396,7 @@ if selected == "Player Search":
     df = pd.read_excel("MatchesData/MetricsData_FutureTalentsVII.xlsx")
     dfofe = df[['Total Shots', 'Shot - Goal', 'Shot - On target', 'Touches in Penalty Area']]
     dfofel = dfofe.columns
-    dfpos = df[['Toal Duels', 'Total Aerial Duels', 'Touches', 'Total Carries', 'Received pass']]
+    dfpos = df[['Total Duels', 'Total Aerial Duels', 'Touches', 'Total Carries', 'Received pass - ']]
     dfposl = dfpos.columns
     valuessofe = dfofe.iloc[0,:]
     lowwofe = []
