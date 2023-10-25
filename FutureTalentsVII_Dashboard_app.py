@@ -475,7 +475,7 @@ dftotalcoverages.columns = ['PlayerID', 'Team', 'Total Coverages']
 dftotalcoverages = dftotalcoverages.sort_values('Total Coverages', ascending=False)
 ####TACKLES (FILTER)####
 df = dfORIGINAL
-df = df[(df['Action'] == 'Tackle')].reset_index(drop=True)
+df = df[(df['Action'] == 'Tackles')].reset_index(drop=True)
 df_backup11 = df
 ##TOTAL TACKLES##
 df = df_backup11
