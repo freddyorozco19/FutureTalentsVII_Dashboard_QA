@@ -1442,6 +1442,9 @@ if selected == "Player Search":
     ###VALORES MÉTRICAS POSESIÓN###
     valuesspos = dfpos.iloc[0,:]
     valuesspos2 = round(dfposccc.mean(), 2)
+    st.write(len(dfofelccc))
+    st.write(len(lowwofe))
+    st.write(len(highhofe))
     ###RADAR MÉTRICAS OFENSIVAS###
     radarofe = Radar(dfofelccc, lowwofe, highhofe,
                   # whether to round any of the labels to integers instead of decimal places
