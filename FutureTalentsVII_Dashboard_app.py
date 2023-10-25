@@ -1394,7 +1394,7 @@ if selected == "Player Search":
     st.dataframe(df)
     ###SEGMENTAR POR GRUPO DE MÉTRICAS###
     df = pd.read_excel("MatchesData/MetricsData_FutureTalentsVII.xlsx")
-    df = df[df['P
+    #df = df[df['P
     dfofe = df[['Total Shots', 'Shot - Goal', 'Shot - On target', 'Touches in Penalty Area']]
     dfofel = dfofe.columns
     dfpos = df[['Total Duels', 'Total Aerial Duels', 'Touches', 'Total Carries', 'Received pass - ']]
