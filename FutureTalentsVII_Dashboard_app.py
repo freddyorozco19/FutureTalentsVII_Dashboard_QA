@@ -446,6 +446,43 @@ df = df_backup7
 dftotalanticipations = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
 dftotalanticipations.columns = ['PlayerID', 'Team', 'Total Anticipations']
 dftotalanticipations = dftotalanticipations.sort_values('Total Anticipations', ascending=False)
+####BLOCKS (FILTER)####
+df = dfORIGINAL
+df = df[(df['Action'] == 'Block')].reset_index(drop=True)
+df_backup8 = df
+##TOTAL BLOCKS##
+df = df_backup8
+dftotalblocks = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
+dftotalblocks.columns = ['PlayerID', 'Team', 'Total Blocks']
+dftotalblocks = dftotalblocks.sort_values('Total Blocks', ascending=False)
+####INTERCEPTIONS (FILTER)####
+df = dfORIGINAL
+df = df[(df['Action'] == 'Interception')].reset_index(drop=True)
+df_backup9 = df
+##TOTAL INTERCEPTIONS##
+df = df_backup9
+dftotalinterceptions = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
+dftotalinterceptions.columns = ['PlayerID', 'Team', 'Total Interceptions']
+dftotalinterceptions = dftotalinterceptions.sort_values('Total Interceptions', ascending=False)
+####COVERAGES (FILTER)####
+df = dfORIGINAL
+df = df[(df['Action'] == 'Coverage')].reset_index(drop=True)
+df_backup10 = df
+##TOTAL COVERAGES##
+df = df_backup10
+dftotalcoverages = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
+dftotalcoverages.columns = ['PlayerID', 'Team', 'Total Coverages']
+dftotalcoverages = dftotalcoverages.sort_values('Total Coverages', ascending=False)
+####TACKLES (FILTER)####
+df = dfORIGINAL
+df = df[(df['Action'] == 'Tackle')].reset_index(drop=True)
+df_backup11 = df
+##TOTAL TACKLES##
+df = df_backup11
+dftotaltackles = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
+dftotaltackles.columns = ['PlayerID', 'Team', 'Total Tackles']
+dftotaltackles = dftotaltackles.sort_values('Total Tackles', ascending=False)
+
 ######JOIN DATAFRAMES######
 dfTotalA = dfprgB.merge(dfpatofithB[['PlayerID', 'Total Passes to Final Third', 'Successful Passes to Final Third', 'Unsuccessful Passes to Final Third', '% Successful Passes to Final Third']], on='PlayerID', how='outer')
 dfTotalB = dfTotalA.merge(dfpasspenareaB[['PlayerID', 'Total Passes to Penalty Area', 'Successful Passes to Penalty Area', 'Unsuccessful Passes to Penalty Area', '% Successful Passes to Penalty Area']], on='PlayerID', how='outer')
@@ -461,9 +498,12 @@ dfTotalK = dfTotalJ.merge(dftotalshots[['PlayerID', 'Total Shots']], on='PlayerI
 dfTotalL = dfTotalK.merge(dftotalduels[['PlayerID', 'Total Duels']], on='PlayerID', how='outer')
 dfTotalM = dfTotalL.merge(dftotalaerialduels[['PlayerID', 'Total Aerial Duels']], on='PlayerID', how='outer')
 dfTotalN = dfTotalM.merge(dftotalanticipations[['PlayerID', 'Total Anticipations']], on='PlayerID', how='outer')
-
+dfTotalO = dfTotalN.merge(dftotalblocks[['PlayerID', 'Total Blocks']], on='PlayerID', how='outer')
+dfTotalP = dfTotalO.merge(dftotainterceptions[['PlayerID', 'Total Interceptions']], on='PlayerID', how='outer')
+dfTotalQ = dfTotalP.merge(dftotalcoverages[['PlayerID', 'Total Coverages']], on='PlayerID', how='outer')
+dfTotalR = dfTotalQ.merge(dftotaltackles[['PlayerID', 'Total Tackles']], on='PlayerID', how='outer')
 #st.write(dfTotalL)
-merged_df = event_counts2.reset_index().merge(dfTotalN, on='PlayerID', how='outer')
+merged_df = event_counts2.reset_index().merge(dfTotalR, on='PlayerID', how='outer')
 df = merged_df
 #dfMERGE = df
 df = df.fillna(0)
