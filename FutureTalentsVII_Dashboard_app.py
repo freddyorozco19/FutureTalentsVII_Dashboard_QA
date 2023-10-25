@@ -472,11 +472,11 @@ columnsevents = df.columns[1:].tolist()
 if selected == "Rankings":
     st.title("RANKINGS")
     st.markdown("""----""")
-    df = df.merge(dfplayer[['PlayerID', 'TEAM', 'POSITION', 'MINUTES PLAYED', 'YEAR']], on='PlayerID', how='outer')
-    column_order = ['PlayerID', 'TEAM', 'POSITION', 'MINUTES PLAYED', 'YEAR'] + [col for col in df.columns if col not in ['PlayerID', 'TEAM', 'POSITION', 'MINUTES PLAYED', 'YEAR']]
+    df = df.merge(dfplayer[['PlayerID', 'NAME', 'TEAM', 'POSITION', 'MINUTES PLAYED', 'YEAR']], on='PlayerID', how='outer')
+    column_order = ['PlayerID', 'NAME', 'TEAM', 'POSITION', 'MINUTES PLAYED', 'YEAR'] + [col for col in df.columns if col not in ['PlayerID', 'NAME', 'TEAM', 'POSITION', 'MINUTES PLAYED', 'YEAR']]
     # Reorganiza las columnas del DataFrame
     df = df[column_order]
-    df = df.rename(columns={'POSITION': 'Position', 'MINUTES PLAYED': 'Minutes Played', 'YEAR': 'Year'})
+    df = df.rename(columns={'POSITION': 'Position', 'MINUTES PLAYED': 'Minutes Played', 'YEAR': 'Year', 'NAME': 'Name'})
     st.write(df)
  
     but0, but1 = st.columns(2)
@@ -1394,6 +1394,7 @@ if selected == "Player Search":
     st.dataframe(df)
     ###SEGMENTAR POR GRUPO DE MÉTRICAS###
     df = pd.read_excel("MatchesData/MetricsData_FutureTalentsVII.xlsx")
+    df = df[df['P
     dfofe = df[['Total Shots', 'Shot - Goal', 'Shot - On target', 'Touches in Penalty Area']]
     dfofel = dfofe.columns
     dfpos = df[['Total Duels', 'Total Aerial Duels', 'Touches', 'Total Carries', 'Received pass - ']]
