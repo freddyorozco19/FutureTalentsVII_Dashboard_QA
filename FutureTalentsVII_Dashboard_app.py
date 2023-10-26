@@ -737,7 +737,7 @@ if selected == "Rankings":
     })
     
     # Crear el gráfico de dispersión usando Matplotlib
-    fig, ax = plt.subplots()
+    fig, ax = mplt.subplots()
     ax.scatter(data['x'], data['y'])
     
     # Función para mostrar el tooltip cuando el mouse esté sobre un punto
