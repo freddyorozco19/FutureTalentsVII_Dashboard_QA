@@ -724,7 +724,7 @@ if selected == "Rankings":
     )
     
     c = alt.Chart(df, width=600).mark_circle().encode(
-        x='a', y='b', size='c', color='#FF0046', 
+        x='a', y='b', size='c', color='c', 
         tooltip=['a', 'b', 'c'] # <--- tooltip part
     )
     
