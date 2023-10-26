@@ -1527,7 +1527,11 @@ if selected == "Player Search":
     dfcrel = dfcre.columns
     dfcreccc = dfccc[['Type pass - Assist', 'Type pass - Key', 'Total Passes to Penalty Area', 'Successful Passes to Penalty Area']]
     dfcrelccc = dfcreccc.columns
- 
+    ###FILTRAR POR ACCIONES DISTRIBUCIÓN###
+    dfdis = df[['Total Passes', 'Total Progressive Passes', 'Total Passes to Final Third', 'Total Long Passes']]
+    dfdisl = dfdis.columns
+    dfdisccc = dfccc[['Total Passes', 'Total Progressive Passes', 'Total Passes to Final Third', 'Total Long Passes']]
+    dfdislccc = dfdisccc.columns
     ###OBTENER MINIMOS Y MÁXIMOS MÉTRICAS OFENSIVAS###
     lowwofe = []
     highhofe = []
@@ -1552,12 +1556,18 @@ if selected == "Player Search":
     for an in range(len(dfcreccc.columns)):
         lowwcre.append(min(dfcreccc.iloc[:,an]))
         highhcre.append(max(dfcreccc.iloc[:,an]))
-
+    ###OBTENER MINIMOS Y MÁXIMOS MÉTRICAS DISTRIBUCIÓN###    
+    lowwdis = []
+    highhdis = []
+    for an in range(len(dfdisccc.columns)):
+        lowwdis.append(min(dfdisccc.iloc[:,an]))
+        highhdis.append(max(dfdisccc.iloc[:,an]))
     ###RANGO DE MÉTRICAS###
     rangparamofe = len(dfofelccc)
     rangparamdef = len(dfdeflccc)
     rangparampos = len(dfposlccc)
     rangparamcre = len(dfcrelccc)
+    rangparamdis = len(dfdislccc)
     ###VALORES MÉTRICAS OFENSIVAS###
     valuessofe = dfofe.iloc[0,:]
     valuessofe2 = round(dfofeccc.mean(), 2)
@@ -1570,6 +1580,9 @@ if selected == "Player Search":
     ###VALORES MÉTRICAS CREACIÓN###
     valuesscre = dfcre.iloc[0,:]
     valuesscre2 = round(dfcreccc.mean(), 2)
+    ###VALORES MÉTRICAS DISTRIBUCIÓN###
+    valuessdis = dfdis.iloc[0,:]
+    valuesdis2 = round(dfdisccc.mean(), 2)
     ###RADAR MÉTRICAS OFENSIVAS###
     radarofe = Radar(dfofelccc, lowwofe, highhofe,
                   # whether to round any of the labels to integers instead of decimal places
@@ -1602,6 +1615,15 @@ if selected == "Player Search":
                   # if the ring_width is more than the center_circle_radius then
                   # the center circle radius will be wider than the width of the concentric circles
                   ring_width=1, center_circle_radius=1)
+    ###RADAR MÉTRICAS DISTRIBUCIÓN###
+    radardis = Radar(dfdislccc, lowwdis, highhdis,
+                   # whether to round any of the labels to integers instead of decimal places
+                   round_int=[False]*rangparamdis,
+                   num_rings=4,  # the number of concentric circles (excluding center circle)
+                   # if the ring_width is more than the center_circle_radius then
+                   # the center circle radius will be wider than the width of the concentric circles
+                   ring_width=1, center_circle_radius=1)
+    
     colorradar1 = "#FF0046"
     colorradar2 = "#444444"
     alpharradar1 = 0.5
@@ -1729,7 +1751,33 @@ if selected == "Player Search":
     
         st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=600, format="png")
     with space4:
+        fig, ax = radardis.setup_axis()  # format axis as a radar
+        fig.set_facecolor('#050E1E')
+        fig.set_dpi(600)
         st.markdown('<h1 style="font-size: 25px;">DISTRIBUTION</h1>', unsafe_allow_html=True)
+        rings_inner = radardis.draw_circles(ax=ax, facecolor=(1,1,1,0), edgecolor='#222229')  # draw circles
+        radar_output = radardis.draw_radar_compare(valuessdis, valuessdis2, ax=ax,
+                                                kwargs_radar={'facecolor': colorradar1, 'alpha' : alpharradar1},
+                                                kwargs_compare={'facecolor': colorradar2, 'alpha' : alpharradar2},
+                                                )  # draw the radar
+        radar_poly, radar_poly2, vertices, vertices2 = radar_output
+        # range_labels = radar.draw_range_labels(ax=ax, fontsize=18,
+        #                                        fontproperties=prop)  # draw the range labels
+        param_labels = radardis.draw_param_labels(ax=ax, fontsize=15, color=(1,1,1,0.8),
+                                               fontproperties=prop2)  # draw the param labels
+    
+        vert = vertices.tolist()
+        dfver = pd.DataFrame(vert, columns=['X', 'Y'])
+        uno = dfver['X'].tolist()
+        dos = dfver['Y'].tolist()
+    
+        ax.scatter(vertices[:, 0], vertices[:, 1], c=colorradar1, edgecolors='#050E1E', s=120, alpha=alpharradar1)
+        ax.scatter(vertices2[:, 0], vertices2[:, 1], c=colorradar2, edgecolors='#050E1E', s=120, alpha=alpharradar2)
+    
+        #st.write(lowwdis)
+        #st.write(highhdis)
+    
+        st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=600, format="png") 
     with space5:
         st.markdown('<h1 style="font-size: 25px;">SET PIECE</h1>', unsafe_allow_html=True)
     st.divider()
