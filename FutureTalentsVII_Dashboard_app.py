@@ -32,7 +32,7 @@ from matplotlib.patches import Rectangle
 from streamlit_option_menu import option_menu
 from datetime import datetime
 from radar_chart2 import Radar
-
+import altair as alt
 #make it look nice from the start
 st.set_page_config(layout='wide', page_title='Future Talents VII - Dashboard', initial_sidebar_state='collapsed')
 
