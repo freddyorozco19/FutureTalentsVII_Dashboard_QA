@@ -719,15 +719,41 @@ if selected == "Rankings":
         st.write(event_counts22[['PlayerID', 'Minutes Played', 'Year', MetricSel]])
     st.divider()
     st.header("METRIC COMPARISON")
-    df = pd.DataFrame(np.random.randn(200,3), columns=['a', 'b', 'c'])
-    st.write(event_counts22)
-    c = alt.Chart(event_counts22, width=800, height=400).mark_circle().encode(
+    #df = pd.DataFrame(np.random.randn(200,3), columns=['a', 'b', 'c'])
+    #st.write(event_counts22)
+    with st.form(key='formScatter'):
+        fk01, fk02, fk03 = st.columns(3)
+        with fk01:
+            #SELECT METRIC
+            dftransp = event_counts22.transpose()            
+            dftransp = dftransp.reset_index()            
+            metricsFK = list(dftransp['index'].drop_duplicates())
+            #metricsFK = metricsFK[15:]
+            metselFK = st.selectbox('Selecciona métrica uno:', metricsFK)
+        with fk02:
+            #SELECT METRIC TWO
+            metricsFK2 = list(dftransp['index'].drop_duplicates())
+            #metricsFK2 = metricsFK2[16:]
+            metselFK2 = st.selectbox('Selecciona métrica dos:', metricsFK2)
+        with fk03:
+            #SELECT POSITION OPTION
+            positionsFK = list(event_counts22['Position'].drop_duplicates())
+            auxpos1 = "ALL"
+            positionsFK.append(auxpos1)
+            posselFK = st.multiselect("Seleccionar posición:", positionsFK)
+            #dfc = df
+            #if posselFK == "ALL":
+            #    df = dfc
+            #else:
+            event_counts22 = event_counts22[event_counts22['Position'].isin(posselFK)]
+         submit_buttonFK = st.form_submit_button(label='Aceptar') 
+  c = alt.Chart(event_counts22, width=800, height=400).mark_circle().encode(
         x='Total Passes', y='Total Progressive Passes', size='Minutes Played', color='Minutes Played', 
         tooltip=['PlayerID', 'Total Passes', 'Total Progressive Passes', 'Minutes Played'] # <--- tooltip part
     )
     
     st.altair_chart(c, theme="streamlit")
-    st.divider()
+    
  
     
  
