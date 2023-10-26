@@ -1562,7 +1562,10 @@ if selected == "Player Search":
     dfdisccc = dfccc[['Total Passes', 'Total Progressive Passes', 'Total Passes to Final Third', 'Total Long Passes']]
     dfdislccc = dfdisccc.columns
     ###FILTRAR POR ACCIONES OTRAS/SETPIECES###
-    dfoth = [['Total Corners', 'Total Free Kicks', 'Total Penalties']]
+    dfoth = df[['Total Corners', 'Total Free Kicks', 'Total Penalties']]
+    dfothl = dfoth.columns
+    dfothccc = dfccc[['Total Corners', 'Total Free Kicks', 'Total Penalties']]
+    dfothlccc = dfothccc.columns
     ###OBTENER MINIMOS Y MÁXIMOS MÉTRICAS OFENSIVAS###
     lowwofe = []
     highhofe = []
