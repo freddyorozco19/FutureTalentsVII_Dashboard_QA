@@ -747,10 +747,10 @@ if selected == "Rankings":
             #else:
             event_counts22 = event_counts22[event_counts22['Position'].isin(posselFK)]
         submit_buttonFK = st.form_submit_button(label='Aceptar') 
-  c = alt.Chart(event_counts22, width=800, height=400).mark_circle().encode(
-        x='Total Passes', y='Total Progressive Passes', size='Minutes Played', color='Minutes Played', 
-        tooltip=['PlayerID', 'Total Passes', 'Total Progressive Passes', 'Minutes Played'] # <--- tooltip part
-    )
+    c = alt.Chart(event_counts22, width=800, height=400).mark_circle().encode(
+          x='Total Passes', y='Total Progressive Passes', size='Minutes Played', color='Minutes Played', 
+          tooltip=['PlayerID', 'Total Passes', 'Total Progressive Passes', 'Minutes Played'] # <--- tooltip part
+      )
     
     st.altair_chart(c, theme="streamlit")
     
