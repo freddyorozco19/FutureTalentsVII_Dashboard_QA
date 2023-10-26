@@ -736,30 +736,7 @@ if selected == "Rankings":
         'labels': ['A', 'B', 'C', 'D', 'E']
     })
     
-    # Crear el gráfico de dispersión usando Matplotlib
-    fig, ax = mplt.subplots()
-    ax.scatter(data['x'], data['y'])
-    
-    # Función para mostrar el tooltip cuando el mouse esté sobre un punto
-    def hover(event):
-        # Obtener las coordenadas del punto donde está el mouse
-        x, y = event.xdata, event.ydata
-        
-        # Buscar el punto más cercano en los datos reales
-        distances = ((data['x'] - x) ** 2 + (data['y'] - y) ** 2) ** 0.5
-        nearest_point = distances.idxmin()
-        
-        # Obtener las etiquetas correspondientes al punto más cercano
-        label = data.loc[nearest_point, 'labels']
-        
-        # Mostrar el tooltip con la etiqueta
-        st.tooltip(label)
-    
-    # Conectar el evento de hover al gráfico de Matplotlib
-    cid = fig.canvas.mpl_connect('motion_notify_event', hover)
-    
-    # Mostrar el gráfico utilizando Streamlit
-    st.pyplot(fig)
+ 
 st.divider()
 if selected == "Player Search":
     ###Data
