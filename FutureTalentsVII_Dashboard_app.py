@@ -718,11 +718,8 @@ if selected == "Rankings":
         #st.write(event_counts22[['PlayerID', MetricSel]])
         st.write(event_counts22[['PlayerID', 'Minutes Played', 'Year', MetricSel]])
 
-    df = pd.DataFrame(
-    np.random.randn(200,3),
-    columns=['a', 'b', 'c']
-    )
-    
+    df = pd.DataFrame(np.random.randn(200,3), columns=['a', 'b', 'c'])
+    st.write(event_counts22)
     c = alt.Chart(df, width=600).mark_circle().encode(
         x='a', y='b', size='c', color='c', 
         tooltip=['a', 'b', 'c'] # <--- tooltip part
