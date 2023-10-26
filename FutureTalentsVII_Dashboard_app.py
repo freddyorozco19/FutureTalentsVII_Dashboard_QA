@@ -1582,7 +1582,7 @@ if selected == "Player Search":
     valuesscre2 = round(dfcreccc.mean(), 2)
     ###VALORES MÉTRICAS DISTRIBUCIÓN###
     valuessdis = dfdis.iloc[0,:]
-    valuesdis2 = round(dfdisccc.mean(), 2)
+    valuessdis2 = round(dfdisccc.mean(), 2)
     ###RADAR MÉTRICAS OFENSIVAS###
     radarofe = Radar(dfofelccc, lowwofe, highhofe,
                   # whether to round any of the labels to integers instead of decimal places
