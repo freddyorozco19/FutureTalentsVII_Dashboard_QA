@@ -720,9 +720,9 @@ if selected == "Rankings":
 
     df = pd.DataFrame(np.random.randn(200,3), columns=['a', 'b', 'c'])
     st.write(event_counts22)
-    c = alt.Chart(df, width=600).mark_circle().encode(
-        x='a', y='b', size='c', color='c', 
-        tooltip=['a', 'b', 'c'] # <--- tooltip part
+    c = alt.Chart(event_counts22, width=600).mark_circle().encode(
+        x='Total Passes', y='Total Progressive Passes', size='Minutes Played', color='Minutes Played', 
+        tooltip=['Total Passes', 'Total Progressive Passes', 'Minutes Played'] # <--- tooltip part
     )
     
     st.altair_chart(c)
