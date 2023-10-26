@@ -724,17 +724,13 @@ if selected == "Rankings":
     )
     
     c = alt.Chart(df, width=600).mark_circle().encode(
-        x='a', y='b', size='c', color='c', 
+        x='a', y='b', size='c', color='#FF0046', 
         tooltip=['a', 'b', 'c'] # <--- tooltip part
     )
     
     st.altair_chart(c)
 
-    data = pd.DataFrame({
-        'x': [1, 2, 3, 4, 5],
-        'y': [5, 4, 3, 2, 1],
-        'labels': ['A', 'B', 'C', 'D', 'E']
-    })
+ 
     
  
 st.divider()
