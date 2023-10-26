@@ -717,7 +717,8 @@ if selected == "Rankings":
         event_counts22 = df000.sort_values(by=[MetricSel], ascending=False)
         #st.write(event_counts22[['PlayerID', MetricSel]])
         st.write(event_counts22[['PlayerID', 'Minutes Played', 'Year', MetricSel]])
-
+    st.divider()
+    st.header("METRIC COMPARISON")
     df = pd.DataFrame(np.random.randn(200,3), columns=['a', 'b', 'c'])
     st.write(event_counts22)
     c = alt.Chart(event_counts22, width=800, height=400).mark_circle().encode(
@@ -726,7 +727,7 @@ if selected == "Rankings":
     )
     
     st.altair_chart(c, theme="streamlit")
-
+    st.divider()
  
     
  
